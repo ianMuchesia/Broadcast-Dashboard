@@ -8,6 +8,10 @@ import TopWorkstationPanels from '../components/TopWorkStationPanels';
 import DeviceTypeCount from '../components/DeviceTypeCount';
 import Loader from '../components/Loader';
 import ErrorComponent from '../components/ErrorComponent';
+import IconServer from '../components/Icon/IconServer';
+import DeviceTypeDistribution from '../components/DeviceTypeDistribution';
+import IconLayoutGrid from '../components/Icon/IconLayoutGrid';
+import PanelDistribution from '../components/PanelDistribution';
 
 interface InterviewData {
   deviceTypes: {
@@ -81,21 +85,21 @@ const Index = () => {
                 uniquePanelTypes={Object.keys(data.panelsInWorkstations.workStationCountByPanel).length}
             />
              <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
-                {/* <div className="panel">
+                <div className="panel">
                     <div className="flex items-center justify-between mb-5">
                         <h5 className="font-semibold text-lg dark:text-white-light">Device Type Distribution</h5>
                         <IconServer className="w-5 h-5 text-primary" />
                     </div>
                     <DeviceTypeDistribution data={data.deviceTypes.countByType} />
-                </div> */}
+                </div>
                 
-                {/* <div className="panel">
+                <div className="panel">
                     <div className="flex items-center justify-between mb-5">
                         <h5 className="font-semibold text-lg dark:text-white-light">Panel Distribution in Workstations</h5>
                         <IconLayoutGrid className="w-5 h-5 text-primary" />
                     </div>
                     <PanelDistribution data={data.panelsInWorkstations.workStationCountByPanel} />
-                </div> */}
+                </div>
             </div>
 
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
