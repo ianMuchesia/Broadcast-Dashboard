@@ -10,10 +10,15 @@ const TopDeviceTypes = ({ data }: TopDeviceTypesProps) => {
 
   useEffect(() => {
     // Get top 10 device types by count
+    //object.entries return an array of key-value pairs
+    //sort the array by value in descending order
+    //slice the array to get the top 10
     const topDevices = Object.entries(data)
       .sort((a, b) => b[1] - a[1])
       .slice(0, 10);
 
+    // array destructuring to get the name and count
+    // const topDevices = Object.entries(data).slice(0, 10);
     const categories = topDevices.map(([name]) => name);
     const series = [
       {

@@ -1,39 +1,13 @@
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
-import PerfectScrollbar from 'react-perfect-scrollbar';
 import { setPageTitle } from '../store/themeConfigSlice';
-import { IRootState } from '../store';
-import Dropdown from '../components/Dropdown';
-import IconHorizontalDots from '../components/Icon/IconHorizontalDots';
-import IconSettings from '../components/Icon/IconSettings';
-import IconHelpCircle from '../components/Icon/IconHelpCircle';
-import IconLogin from '../components/Icon/IconLogin';
-import IconSearch from '../components/Icon/IconSearch';
-import IconMessagesDot from '../components/Icon/IconMessagesDot';
-import IconPhone from '../components/Icon/IconPhone';
-import IconUserPlus from '../components/Icon/IconUserPlus';
-import IconBell from '../components/Icon/IconBell';
-import IconMenu from '../components/Icon/IconMenu';
-import IconMessage from '../components/Icon/IconMessage';
-import IconPhoneCall from '../components/Icon/IconPhoneCall';
-import IconVideo from '../components/Icon/IconVideo';
-import IconCopy from '../components/Icon/IconCopy';
-import IconTrashLines from '../components/Icon/IconTrashLines';
-import IconShare from '../components/Icon/IconShare';
-import IconMoodSmile from '../components/Icon/IconMoodSmile';
-import IconSend from '../components/Icon/IconSend';
-import IconMicrophoneOff from '../components/Icon/IconMicrophoneOff';
-import IconDownload from '../components/Icon/IconDownload';
-import IconCamera from '../components/Icon/IconCamera';
 import SummaryCards from '../components/SummaryCards';
-import IconServer from '../components/Icon/IconServer';
-import IconLayoutGrid from '../components/Icon/IconLayoutGrid';
-import DeviceTypeDistribution from '../components/DeviceTypeDistribution';
-import PanelDistribution from '../components/PanelDistribution';
 import TopDeviceTypes from '../components/TopDeviceTypes';
 import TopWorkstationPanels from '../components/TopWorkStationPanels';
 import DeviceTypeCount from '../components/DeviceTypeCount';
+import Loader from '../components/Loader';
+import ErrorComponent from '../components/ErrorComponent';
 
 interface InterviewData {
   deviceTypes: {
@@ -80,17 +54,13 @@ const Index = () => {
 
     if (isLoading) {
         return (
-            <div className="flex h-[400px] items-center justify-center">
-                <div className="animate-spin border-2 border-primary border-t-transparent rounded-full h-12 w-12"></div>
-            </div>
+            <Loader/>
         );
     }
 
     if (error) {
         return (
-            <div className="flex h-[400px] items-center justify-center">
-                <div className="bg-danger-light dark:bg-danger/20 text-danger p-4 rounded-md">{error}</div>
-            </div>
+          <ErrorComponent error={error} />
         );
     }
 
@@ -106,25 +76,26 @@ const Index = () => {
               <SummaryCards 
                 deviceTotalCount={data.deviceTypes.totalCount} 
                 panelTotalCount={data.panelsInWorkstations.totalCount} 
+                // object.keys returns an array of the keys of the object and then we get length
                 uniqueDeviceTypes={Object.keys(data.deviceTypes.countByType).length}
                 uniquePanelTypes={Object.keys(data.panelsInWorkstations.workStationCountByPanel).length}
             />
              <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
-                <div className="panel">
+                {/* <div className="panel">
                     <div className="flex items-center justify-between mb-5">
                         <h5 className="font-semibold text-lg dark:text-white-light">Device Type Distribution</h5>
                         <IconServer className="w-5 h-5 text-primary" />
                     </div>
                     <DeviceTypeDistribution data={data.deviceTypes.countByType} />
-                </div>
+                </div> */}
                 
-                <div className="panel">
+                {/* <div className="panel">
                     <div className="flex items-center justify-between mb-5">
                         <h5 className="font-semibold text-lg dark:text-white-light">Panel Distribution in Workstations</h5>
                         <IconLayoutGrid className="w-5 h-5 text-primary" />
                     </div>
                     <PanelDistribution data={data.panelsInWorkstations.workStationCountByPanel} />
-                </div>
+                </div> */}
             </div>
 
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">

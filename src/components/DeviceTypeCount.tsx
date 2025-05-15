@@ -24,13 +24,17 @@ const DeviceTypeCount = ({ data }: DeviceTypeCountProps) => {
     };
     
     // Filter and sort the data
+    //object.entries(data) returns an array of key-value pairs
+    //filter the array based on the search term
+    //sort the array based on the selected field and direction
     const filteredData = Object.entries(data)
         .filter(([name]) => 
             name.toLowerCase().includes(searchTerm.toLowerCase())
         )
         .sort((a, b) => {
             if (sortField === 'name') {
-                return sortDirection === 'asc' 
+                return sortDirection === 'asc'
+                //localeCompare is used to compare strings in a locale-sensitive manner 
                     ? a[0].localeCompare(b[0]) 
                     : b[0].localeCompare(a[0]);
             } else {

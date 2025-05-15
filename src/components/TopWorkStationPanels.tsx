@@ -10,6 +10,9 @@ const TopWorkstationPanels = ({ data }: TopWorkstationPanelsProps) => {
 
   useEffect(() => {
     // Get top 10 panels by count, filtering out empty string key
+    // object.entries return an array of key-value pairs
+    // remove the empty string key was throwing an error
+    // sort the array by value in descending order
     const topPanels = Object.entries(data)
       .filter(([name]) => name !== "")
       .sort((a, b) => b[1] - a[1])
@@ -17,6 +20,7 @@ const TopWorkstationPanels = ({ data }: TopWorkstationPanelsProps) => {
 
     const categories = topPanels.map(([name]) => {
       // Extract the panel name from the path
+      // || name to handle cases where name is undefined
       const panelName = name.split("/").pop() || name;
       return panelName;
     });
