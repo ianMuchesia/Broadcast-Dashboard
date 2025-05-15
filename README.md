@@ -1,70 +1,71 @@
-# Broadcast Dashboard - Component Analysis & Design Decisions
+# Broadcast System Dashboard
 
-## Overview
+This dashboard provides insights into device types and panels in workstations in a broadcast environment, visualizing data from InterviewData.json.
+
+## Prerequisites
+Before you begin, ensure you have the following installed:
+- [Node.js](https://nodejs.org/) (v14.0.0 or higher)
+- npm (usually comes with Node.js)
+
+## Getting Started
+Follow these steps to set up and run the dashboard:
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/ianMuchesia/broadcast-dashboard.git
+cd broadcast-dashboard
+```
+
+### 2. Install dependencies
+Due to some package compatibility issues, we need to use the legacy peer deps flag:
+```bash
+npm install --legacy-peer-deps
+```
+
+### 3. Run the development server
+```bash
+npm run dev
+```
+The application should now be running on [http://localhost:5173](http://localhost:5173) (or another port if 5173 is in use).
+
+## Project Structure
+- `/components` - React components for the dashboard
+- `/pages` - Main page layouts
+- `public` - Static assets including InterviewData.json
+- `/store` - Redux store configuration
+
+## Features
+- Summary cards showing device and panel counts
+- Top device types visualization
+- Top workstation panels visualization
+- Searchable and sortable device type table with pagination
+
+## Technologies Used
+- React
+- TypeScript
+- Tailwind CSS for styling
+- ApexCharts for data visualization
+- Redux for state management
+
+## Component Analysis & Design Decisions
+
+### Overview
 This document explains the design decisions and data manipulation techniques used in creating the dashboard components. The JSON data represents a broadcast or media production environment with two main data structures:
 
 - **deviceTypes**: Information about different device types and their counts
 - **panelsInWorkstations**: Information about panels installed in workstations
 
-## Data Structure Analysis
+## Data Analysis
+The dashboard visualizes broadcast system data that includes:
+- 260+ device types with varying counts
+- 900+ panels in workstations with hierarchical naming
 
-```json
-"deviceTypes": {
-  "totalCount": 260,
-  "countByType": {
-    "evertz_mv": 1,
-    "evertz_multiviewercontrol": 1,
-    "PackagerAuto": 109,
-    /* many more device types... */
-  }
-}
-```
+Each component is designed to present this information in the most useful way for broadcast system administrators and engineers.
 
-- The structure contains a total count (260) and a mapping of device types to their individual counts
-- There are over 200 different device types with varying counts
-- Some device types have very high counts (e.g., "CP-1000E": 210), while others have just 1 or 2 instances
-
-
-## Panels in Workstations Data
-
-```json
-"panelsInWorkstations": {
-  "totalCount": 954,
-  "workStationCountByPanel": {
-    "ringmaster_packaging/package_router": 198,
-    "ringmaster_packaging/arrivals_board": 188,
-    /* many more panels... */
-  }
-}
-```
-
-- The structure contains a total count (954) and a mapping of panel types to their counts
-- Panel names use a path-like structure with categories (e.g., "studio_1/video_xy_mapped")
-- Some panels appear in many workstations, while others are rare or unused (value of 0)
-- There are empty key entries ("": 170) that need special handling
-
-
-## Dashboard Component Design Rationale
-
-### Main Dashboard Component
-Design Decision: Create a container component that fetches data and manages overall layout.
-
-Rationale:
-- Separates data fetching concerns from presentation components
-- Provides loading and error states for better UX
-- Uses a grid layout for responsive design across different screen sizes
-- Organizes visualizations logically based on their importance and relationship
-
-### Summary Cards Component
-Design Decision: Display four key metrics in card format at the top of the dashboard.
-
-# Broadcast System Dashboard - Component Analysis & Design Decisions
-
-## Overview
-This document explains the design decisions and data manipulation techniques used in creating the dashboard components. The JSON data represents a broadcast or media production environment with two main data structures:
-
-- **deviceTypes**: Information about different device types and their counts
-- **panelsInWorkstations**: Information about panels installed in workstations
+## Notes
+- The search functionality in the device table is case-insensitive
+- Charts are optimized for both desktop and mobile viewing
+- Dark mode support is available throughout the application
 
 ## Data Structure Analysis
 
