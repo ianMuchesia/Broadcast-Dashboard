@@ -9,17 +9,8 @@ const routes = [
         path: '/',
         element: <Index />,
         layout: 'default',
-    },
-    {
-        path:"/login",
-        element:<Login/>,
-        layout: "blank"
-    },
-    {
-        path:"/signup",
-        element:<Signup/>,
-        layout:"blank"
     }
+    
 
 ];
 
